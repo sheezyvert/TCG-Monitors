@@ -156,7 +156,7 @@ const PRODUCTS = [
   {
     id: "aj4-flight-club",
     brand: "Jordan",
-    name: "Air Jordan 4 Flight Club",
+    name: "Air Jordan 4 Flight Club (2026)",
     basePrice: 4700,
     category: "sneakers",
     sizes: [

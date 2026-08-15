@@ -150,8 +150,7 @@ function renderModalSizes() {
     const b = document.createElement("button");
     b.className = "size-btn" + (modalSize === s.size ? " active" : "");
     b.disabled = left <= 0;
-    const meta = [];
-    if (s.price && s.price !== modalProduct.basePrice) meta.push(fmtR(s.price));
+    const meta = [fmtR(priceFor(modalProduct, s))];
     if (s.qty > 1) meta.push(`${left} left`);
     if (left <= 0) meta.length = 0, meta.push("in cart");
     b.innerHTML = `${s.size}${meta.length ? `<span class="size-meta">${meta.join(" · ")}</span>` : ""}`;

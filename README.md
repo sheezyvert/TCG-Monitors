@@ -59,8 +59,4 @@ Everything lives in `js/products.js`. Each product has:
 
 ## Image notes
 
-Product photos were pulled from Court Order (and StockX for three items they don't carry).
-
-⚠️ **AJ4 "Flight Club"** — no colorway goes by that name, so the site currently shows **AJ4 White Cement (2025)** photos as a stand-in. If your batch is a different colorway, replace `images/products/aj4-flight-club-*.jpg`.
-
-Also double-check the **NOCTA Distant Regards tee** (showing the white Souvenir Cactus tee from that collection) and the **Dunk Low UV Reactive (GS)** (showing the Photon Dust/Midnight Navy pair) match what you have.
+Product photos were pulled from Court Order, with StockX/Santos x Shop fills for items they don't carry (UV Reactive Dunk, both QNTM Yeezys, Distant Regards tee).
