@@ -24,7 +24,7 @@ const PRODUCTS = [
     id: "aj2-off-white-black",
     brand: "Jordan",
     name: "Off-White x Air Jordan 2 Low Black",
-    basePrice: 4000,
+    basePrice: 4500,
     category: "sneakers",
     sizes: [{ size: "UK6.5", qty: 1 }],
     images: ["aj2-off-white-black-1.jpg", "aj2-off-white-black-2.jpg", "aj2-off-white-black-3.jpg"],
