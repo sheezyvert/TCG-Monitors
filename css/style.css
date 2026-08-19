@@ -8,6 +8,7 @@
   --grey-3: #a3a3a0;
   --grey-4: #565654;
   --accent: #0a0a0a;
+  --sale: #c8102e;
   --max-w: 1400px;
   --pad: clamp(16px, 4vw, 48px);
   --font-body: "Archivo", -apple-system, "Helvetica Neue", Arial, sans-serif;
@@ -274,10 +275,16 @@ button { font-family: inherit; cursor: pointer; }
   color: var(--grey-4);
   letter-spacing: 0.03em;
 }
-.card-tag {
+.card-tags {
   position: absolute;
   top: 12px;
   left: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.card-tag {
   background: var(--black);
   color: var(--white);
   font-size: 10px;
@@ -285,6 +292,28 @@ button { font-family: inherit; cursor: pointer; }
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 4px 8px;
+}
+.card-tag.tag-sale { background: var(--sale); }
+
+/* Sale pricing */
+.price-was {
+  text-decoration: line-through;
+  color: var(--grey-3);
+  font-weight: 500;
+  margin-right: 8px;
+}
+.price-sale { color: var(--sale); }
+.price-save {
+  display: inline-block;
+  margin-left: 10px;
+  background: var(--sale);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  vertical-align: middle;
 }
 
 .grid-empty {

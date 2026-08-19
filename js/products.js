@@ -73,7 +73,7 @@ const PRODUCTS = [
     id: "aj1-bred-85",
     brand: "Jordan",
     name: "Air Jordan 1 High OG '85 Bred",
-    basePrice: 4200,
+    basePrice: 5500,
     category: "sneakers",
     sizes: [
       { size: "UK8", qty: 1 },

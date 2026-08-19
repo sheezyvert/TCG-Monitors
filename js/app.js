@@ -5,11 +5,25 @@ const fmtR = (n) => "R" + n.toLocaleString("en-ZA");
 
 const priceFor = (product, sizeEntry) => sizeEntry.price ?? product.basePrice;
 
-function priceRange(product) {
+// Sale display: sneakers show a struck-through "was" price (sale price + R1000,
+// rounded to the nearest R500) next to the actual price.
+const onSale = (product) => product.category === "sneakers";
+const compareAt = (price) => Math.round((price + 1000) / 500) * 500;
+
+function priceHTML(product, sizeEntry) {
+  if (sizeEntry) {
+    const price = priceFor(product, sizeEntry);
+    if (!onSale(product)) return fmtR(price);
+    const was = compareAt(price);
+    return `<span class="price-was">${fmtR(was)}</span><span class="price-sale">${fmtR(price)}</span><span class="price-save">Save ${fmtR(was - price)}</span>`;
+  }
   const prices = product.sizes.map((s) => priceFor(product, s));
   const min = Math.min(...prices);
   const max = Math.max(...prices);
-  return min === max ? fmtR(min) : `${fmtR(min)} – ${fmtR(max)}`;
+  const sale = min === max ? fmtR(min) : `${fmtR(min)} – ${fmtR(max)}`;
+  if (!onSale(product)) return sale;
+  const was = min === max ? fmtR(compareAt(min)) : `${fmtR(compareAt(min))} – ${fmtR(compareAt(max))}`;
+  return `<span class="price-was">${was}</span><span class="price-sale">${sale}</span>`;
 }
 
 /* ---------- State ---------- */
@@ -96,12 +110,15 @@ function renderGrid() {
       <div class="card-img">
         <img class="primary ${p.images[1] ? "has-alt" : ""}" src="${IMG_DIR}${p.images[0]}" alt="${p.brand} ${p.name}" loading="lazy" />
         ${p.images[1] ? `<img class="secondary" src="${IMG_DIR}${p.images[1]}" alt="" loading="lazy" />` : ""}
-        ${unitCount === 1 ? `<span class="card-tag">1 of 1</span>` : ""}
+        <div class="card-tags">
+          ${onSale(p) ? `<span class="card-tag tag-sale">Sale</span>` : ""}
+          ${unitCount === 1 ? `<span class="card-tag">1 of 1</span>` : ""}
+        </div>
       </div>
       <div class="card-info">
         <p class="card-brand">${p.brand}</p>
         <h3 class="card-name">${p.name}</h3>
-        <p class="card-price">${priceRange(p)}</p>
+        <p class="card-price">${priceHTML(p)}</p>
         <p class="card-sizes">${sizeList}</p>
       </div>`;
     card.onclick = () => openProduct(p);
@@ -115,7 +132,7 @@ function openProduct(p) {
   modalSize = null;
   document.getElementById("pmBrand").textContent = p.brand;
   document.getElementById("pmName").textContent = p.name;
-  document.getElementById("pmPrice").textContent = priceRange(p);
+  document.getElementById("pmPrice").innerHTML = priceHTML(p);
 
   const img = document.getElementById("pmImage");
   img.src = IMG_DIR + p.images[0];
@@ -158,7 +175,7 @@ function renderModalSizes() {
       modalSize = s.size;
       renderModalSizes();
       const entry = modalProduct.sizes.find((x) => x.size === s.size);
-      document.getElementById("pmPrice").textContent = fmtR(priceFor(modalProduct, entry));
+      document.getElementById("pmPrice").innerHTML = priceHTML(modalProduct, entry);
       updateAddBtn();
     };
     wrap.appendChild(b);
