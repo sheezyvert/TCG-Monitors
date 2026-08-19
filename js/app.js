@@ -344,7 +344,9 @@ document.getElementById("checkoutForm").onsubmit = (e) => {
     phone: (data.phone || "").trim(),
     amount: total,
     itemName: `SneakyLink order (${cart.reduce((t, l) => t + l.qty, 0)} item(s))`,
-    itemDescription: itemsSummary.slice(0, 255),
+    // Everything the seller needs to fulfil the order, visible on the
+    // PayFast transaction: items+sizes, delivery method, drop-off point.
+    itemDescription: `${itemsSummary} | Ship: ${ship.label} ${fmtR(ship.price)} | To: ${data.notes.trim()}`.slice(0, 255),
     shipping: `${ship.label} (${fmtR(ship.price)})`,
     notes: data.notes.trim(),
   });
